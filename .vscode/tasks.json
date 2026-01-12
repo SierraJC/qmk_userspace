@@ -22,7 +22,7 @@
 			"detail": "Compile all configured keyboards/keymaps in qmk.json"
 		},
 		{
-			"label": "QMK: Build Lily58 Vial",
+			"label": "QMK: Build Lily58",
 			"type": "shell",
 			"command": "qmk",
 			"args": [
@@ -32,7 +32,8 @@
 				"-km",
 				"sierrajc",
 				"-e",
-				"CONVERT_TO=helios"
+				"CONVERT_TO=helios",
+				"--compiledb"
 			],
 			"group": "build",
 			"presentation": {
@@ -42,7 +43,7 @@
 				"panel": "shared"
 			},
 			"problemMatcher": [],
-			"detail": "Compile the Lily58 keyboard with Vial keymap"
+			"detail": "Compile the Lily58 keyboard with custom keymap"
 		},
 		{
 			"label": "QMK: Clean Build",
@@ -81,7 +82,7 @@
 				"panel": "shared"
 			},
 			"problemMatcher": [],
-			"detail": "Compile and flash the Lily58 keyboard with Vial keymap"
+			"detail": "Compile and flash the Lily58 keyboard with custom keymap"
 		},
 		{
 			"label": "QMK: Doctor (Environment Check)",

@@ -1,10 +1,10 @@
 {
 	"version": 1,
-	"uid": 452674973127736702,
+	"uid": 452674973127736700,
 	"layout": [
 		[
 			[
-				"KC_ESCAPE",
+				"KC_GRAVE",
 				"KC_1",
 				"KC_2",
 				"KC_3",
@@ -12,7 +12,7 @@
 				"KC_5"
 			],
 			[
-				"LT1(KC_TAB)",
+				"KC_TAB",
 				"KC_Q",
 				"KC_W",
 				"KC_E",
@@ -37,11 +37,11 @@
 			],
 			[
 				-1,
-				"KC_LALT",
-				"KC_NO",
+				"MEH(KC_NO)",
+				"KC_ESCAPE",
 				"MO(1)",
-				"KC_SPACE",
-				"KC_LBRACKET"
+				"LSFT_T(KC_SPACE)",
+				"USER01"
 			],
 			[
 				"KC_GRAVE",
@@ -77,11 +77,11 @@
 			],
 			[
 				-1,
-				"KC_BSPACE",
-				"KC_BSPACE",
-				"MO(2)",
+				"MEH(KC_NO)",
+				"KC_DELETE",
+				"LT2(KC_BSPACE)",
 				"LT3(KC_ENTER)",
-				"KC_RBRACKET"
+				"KC_NO"
 			]
 		],
 		[
@@ -94,7 +94,7 @@
 				"KC_F5"
 			],
 			[
-				"KC_TRNS",
+				"KC_NO",
 				"KC_QUOTE",
 				"LSFT(KC_QUOTE)",
 				"LSFT(KC_6)",
@@ -102,7 +102,7 @@
 				"LSFT(KC_GRAVE)"
 			],
 			[
-				"KC_TRNS",
+				"KC_NO",
 				"LSFT(KC_1)",
 				"LSFT(KC_2)",
 				"LSFT(KC_3)",
@@ -110,12 +110,12 @@
 				"LSFT(KC_5)"
 			],
 			[
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS"
+				"KC_NO",
+				"KC_NO",
+				"KC_HOME",
+				"KC_PGUP",
+				"KC_PGDOWN",
+				"KC_END"
 			],
 			[
 				-1,
@@ -123,7 +123,7 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_TRNS"
+				"USER01"
 			],
 			[
 				"KC_F11",
@@ -163,41 +163,41 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_TRNS"
+				"QK_CAPS_WORD_TOGGLE"
 			]
 		],
 		[
 			[
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS"
+				"KC_NO",
+				"LALT(KC_1)",
+				"LALT(KC_2)",
+				"LALT(KC_3)",
+				"LALT(KC_4)",
+				"LALT(KC_5)"
 			],
 			[
-				"KC_TRNS",
-				"KC_1",
-				"KC_2",
-				"KC_3",
-				"KC_4",
-				"KC_5"
+				"LALT(KC_D)",
+				"KC_NO",
+				"KC_NO",
+				"LALT(KC_1)",
+				"KC_NO",
+				"LALT(KC_7)"
 			],
 			[
-				"KC_F1",
-				"KC_F2",
-				"KC_F3",
-				"KC_F4",
-				"KC_F5",
-				"KC_F6"
+				"MEH(KC_NO)",
+				"KC_LGUI",
+				"KC_LALT",
+				"KC_LSHIFT",
+				"KC_LCTRL",
+				"KC_NO"
 			],
 			[
-				"KC_F7",
-				"KC_F8",
-				"KC_F9",
-				"KC_F10",
-				"KC_F11",
-				"KC_F12"
+				"KC_NO",
+				"KC_NO",
+				"KC_NO",
+				"KC_NO",
+				"KC_NO",
+				"LALT(KC_2)"
 			],
 			[
 				-1,
@@ -205,23 +205,23 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_TRNS"
+				"KC_NO"
 			],
 			[
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS"
+				"KC_NO",
+				"KC_NO",
+				"LALT(KC_9)",
+				"LALT(KC_8)",
+				"LALT(KC_7)",
+				"LALT(KC_6)"
 			],
 			[
-				"KC_TRNS",
-				"KC_0",
-				"KC_9",
-				"KC_8",
-				"KC_7",
-				"KC_6"
+				"KC_NO",
+				"KC_NO",
+				"RALT(KC_RIGHT)",
+				"RALT(KC_UP)",
+				"RALT(KC_DOWN)",
+				"RALT(KC_LEFT)"
 			],
 			[
 				"KC_NO",
@@ -232,12 +232,12 @@
 				"KC_LEFT"
 			],
 			[
-				"KC_BSLASH",
-				"KC_RBRACKET",
-				"KC_LBRACKET",
-				"KC_EQUAL",
-				"KC_MINUS",
-				"LSFT(KC_EQUAL)"
+				"KC_NO",
+				"KC_NO",
+				"RCTL(KC_RIGHT)",
+				"RCTL(KC_UP)",
+				"RCTL(KC_DOWN)",
+				"RCTL(KC_LEFT)"
 			],
 			[
 				-1,
@@ -245,7 +245,7 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_TRNS"
+				"KC_NO"
 			]
 		],
 		[
@@ -287,7 +287,7 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_WBAK"
+				"QK_LAYER_LOCK"
 			],
 			[
 				"KC_NO",
@@ -327,7 +327,7 @@
 				"KC_TRNS",
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_WFWD"
+				"QK_LAYER_LOCK"
 			]
 		],
 		[
@@ -464,9 +464,9 @@
 			[
 				"KC_TRNS",
 				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
-				"KC_TRNS",
+				"KC_KP_9",
+				"KC_KP_8",
+				"KC_KP_7",
 				"KC_TRNS"
 			],
 			[
@@ -505,23 +505,19 @@
 	],
 	"layout_options": -1,
 	"macro": [
+		[],
 		[
 			[
-				"down",
-				"KC_LCTRL"
-			],
-			[
-				"tap",
-				"KC_A",
-				"KC_C"
-			],
-			[
-				"up",
-				"KC_LCTRL"
+				"text",
+				"n't"
 			]
 		],
-		[],
-		[],
+		[
+			[
+				"text",
+				"I'd"
+			]
+		],
 		[],
 		[],
 		[],
@@ -540,10 +536,10 @@
 	"via_protocol": 9,
 	"tap_dance": [
 		[
-			"KC_ENTER",
-			"MO(3)",
+			"KC_BSPACE",
+			"KC_DELETE",
 			"KC_NO",
-			"KC_NO",
+			"KC_BSPACE",
 			100
 		],
 		[
@@ -605,46 +601,46 @@
 			"RCTL(KC_Z)"
 		],
 		[
+			"KC_N",
+			"KC_T",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"M1"
 		],
 		[
+			"KC_I",
+			"LSFT_T(KC_D)",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"M2"
 		],
 		[
+			"KC_SLASH",
+			"KC_RSHIFT",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"LSFT(KC_SLASH)"
 		],
 		[
+			"KC_Y",
+			"KC_U",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"LCTL(KC_BSPACE)"
 		],
 		[
+			"RCTL_T(KC_J)",
+			"RSFT_T(KC_K)",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"KC_ESCAPE"
 		],
 		[
+			"KC_0",
+			"KC_BSPACE",
 			"KC_NO",
 			"KC_NO",
-			"KC_NO",
-			"KC_NO",
-			"KC_NO"
+			"KC_DELETE"
 		],
 		[
 			"KC_NO",
@@ -1280,7 +1276,7 @@
 	],
 	"settings": {
 		"1": 0,
-		"2": 50,
+		"2": 25,
 		"3": 0,
 		"4": 200,
 		"5": 5,
@@ -1299,7 +1295,7 @@
 		"19": 80,
 		"20": 5,
 		"21": 0,
-		"22": 0,
+		"22": 1,
 		"23": 0,
 		"24": 0,
 		"25": 200,
