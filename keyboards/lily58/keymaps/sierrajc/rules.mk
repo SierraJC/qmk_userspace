@@ -19,6 +19,9 @@ LTO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 OS_DETECTION_ENABLE = yes
 
+# Custom features
+SRC += features/auto_capitalise_i.c
+
 # Suppress warning about unknown pragmas (e.g., #pragma region/endregion) being
 # treated as errors by toolchains that enable -Werror. This keeps IDE folding
 # markers harmless without changing source files.

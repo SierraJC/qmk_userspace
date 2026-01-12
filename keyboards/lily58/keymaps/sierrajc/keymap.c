@@ -4,6 +4,8 @@
 #include QMK_KEYBOARD_H
 #include "os_detection.h"
 
+#include "features/auto_capitalise_i.h"
+
 #pragma region Layers
 enum layer_number {
 	_QWERTY = 0,
@@ -88,6 +90,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	const bool isGaming = (get_highest_layer(layer_state | default_layer_state) == _GAMING);
+
+	// Do not run auto capitalise when the gaming layer is active.
+	if (!isGaming) {
+		if (!auto_capitalise_i_process_record(keycode, record)) return false;
+	}
+
 	if (chat_active && record->event.pressed) {
 		if (
 		    // Regular key presses
