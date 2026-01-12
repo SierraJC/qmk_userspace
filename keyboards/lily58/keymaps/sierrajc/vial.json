@@ -12,6 +12,11 @@
             "name": "Chat mode",
             "title": "Enter chat (switch to QWERTY)",
             "shortName": "CHAT_MODE"
+        },
+        {
+            "name": "Camel case mode",
+            "title": "Toggle camel case typing",
+            "shortName": "CAMELCASE"
         }
     ],
     "layouts": {

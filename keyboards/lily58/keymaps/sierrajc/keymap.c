@@ -5,6 +5,7 @@
 #include "os_detection.h"
 
 #include "features/auto_capitalise_i.h"
+#include "features/auto_camelcase.h"
 
 #pragma region Layers
 enum layer_number {
@@ -22,6 +23,8 @@ enum layer_number {
 enum custom_keycodes {
 	/* Toggles qwerty layer until ESC or ENTER are pressed - Used for in-game chat */
 	CHAT_MODE = QK_KB_0,
+	/* Toggles camel case typing mode */
+	CAMELCASE,
 };
 
 static bool chat_active = false;
@@ -92,9 +95,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	const bool isGaming = (get_highest_layer(layer_state | default_layer_state) == _GAMING);
 
-	// Do not run auto capitalise when the gaming layer is active.
+	// Do not run auto capitalise or auto camel case when the gaming layer is active.
 	if (!isGaming) {
 		if (!auto_capitalise_i_process_record(keycode, record)) return false;
+		if (!auto_camelcase_process_record(keycode, record)) return false;
 	}
 
 	if (chat_active && record->event.pressed) {
@@ -121,6 +125,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 				chat_active = true;
 				layer_off(_GAMING);
 				layer_on(_QWERTY);
+			}
+			return false;
+		case CAMELCASE:
+			if (record->event.pressed) {
+				auto_camelcase_toggle();
 			}
 			return false;
 	}
@@ -334,6 +343,14 @@ void render_layer_state(void) {
 	}
 }
 
+void render_camelcase_status(void) {
+	if (auto_camelcase_is_active()) {
+		oled_write_P(PSTR("CAMEL"), false);
+	} else {
+		oled_write_P(PSTR("     "), false);
+	}
+}
+
 bool oled_task_user(void) {
 	if (is_keyboard_master()) {
 		render_paw();
@@ -341,6 +358,7 @@ bool oled_task_user(void) {
 		render_space();
 		render_layer_state();
 		render_space();
+		render_camelcase_status();
 		render_space();
 		render_mod_status_gui_alt(get_mods() | get_oneshot_mods());
 		render_mod_status_ctrl_shift(get_mods() | get_oneshot_mods());
