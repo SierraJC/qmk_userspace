@@ -17,90 +17,92 @@ enum layer_number {
 	_UNUSED,
 };
 
-#define RAISE MO(_NAV)
-#define LOWER MO(_SYMBOLS)
-
 enum custom_keycodes {
 	/* Toggles qwerty layer until ESC or ENTER are pressed - Used for in-game chat */
 	CHAT_MODE = QK_KB_0,
 	/* Toggles camel case typing mode */
 	CAMELCASE,
+	MACRO_TILDE,
 };
+
+// Home row mods
+#define HRM_A LGUI_T(KC_A)
+#define HRM_S LALT_T(KC_S)
+#define HRM_D LSFT_T(KC_D)
+#define HRM_F LCTL_T(KC_F)
+#define HRM_J RCTL_T(KC_J)
+#define HRM_K RSFT_T(KC_K)
+#define HRM_L RALT_T(KC_L)
+#define HRM_SCLN RGUI_T(KC_SCLN)
+
+// Layer-tap and mod-tap keys
+#define SFT_SPC LSFT_T(KC_SPC)
+#define NAV_BSPC LT(_NAV, KC_BSPC)
+#define MS_ENT LT(_MOUSE, KC_ENT)
+#define SYM MO(_SYMBOLS)
 
 static bool chat_active = false;
 
-/*
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |      |
- * |------+------+------+------+------+------|  LBRC |    |  RBRC |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | ALT  |      | _SYM | /Space  /       \Enter \  | _NAV | BackSP|BackSP|
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-// ? Keymap is not yet baked into firmware. I'm using Vial GUI to live edit keymap while I find what works for me. Ref: `layout.vil`.
-// TODO: Bake keymap into firmware once changes settle.
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    // clang-format off
-		[_QWERTY] = LAYOUT(
-			KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-			LT(_SYMBOLS,KC_TAB), KC_Q, KC_W,  KC_E,    KC_R,    KC_T,                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-			KC_LCTL, LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), KC_G,     KC_H, RCTL_T(KC_J), RSFT_T(KC_K), RALT_T(KC_L), RGUI_T(KC_SCLN), KC_QUOT,
-			KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
-											        		KC_LALT, KC_NO,   MO(_SYMBOLS),   KC_SPC,      LT(_MOUSE,KC_ENT), MO(_NAV), KC_BSPC, KC_BSPC
-		),
-		[_SYMBOLS] = LAYOUT(
-			_______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,
-			_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
-			_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
-			_______, _______, _______, _______, _______, _______, _______, _______, KC_PIPE, KC_GRAVE, KC_PLUS, KC_LCBR, KC_RCBR, _______,
-																_______, _______, _______, _______, _______,  _______, _______, _______
-		),
-		[_NAV] = LAYOUT(
-			_______, _______, _______, _______, _______, _______,                     _______, _______, _______, _______, _______, _______,
-			KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-			_______, _______, _______, _______, _______, _______,                     XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
-			_______, _______, _______, _______, _______, _______,   _______, _______, KC_PLUS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS, _______,
-																_______, _______, _______,  _______, _______,  _______, _______, _______
-		),
-		[_MOUSE] = LAYOUT(
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-																_______, _______, _______, _______, _______,  _______, _______, _______
-		),
-		[_UNUSED] = LAYOUT(
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-																_______, _______, _______, _______, _______,  _______, _______, _______
-		),
-		[_GAMING] = LAYOUT(
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-			XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-																CHAT_MODE, _______, _______, _______, _______,  _______, _______, _______
-		)
-    // clang-format on
+	[_QWERTY] = LAYOUT(
+		   KC_GRV,     KC_1,     KC_2,        KC_3,     KC_4,     KC_5,                                   KC_6,           KC_7,         KC_8,           KC_9,      KC_0,     KC_GRV,
+		   KC_TAB,     KC_Q,     KC_W,        KC_E,     KC_R,     KC_T,                                   KC_Y,           KC_U,         KC_I,           KC_O,      KC_P,    KC_MINS,
+		  KC_LCTL,    HRM_A,    HRM_S,       HRM_D,    HRM_F,     KC_G,                                   KC_H,          HRM_J,        HRM_K,          HRM_L,  HRM_SCLN,    KC_QUOT,
+		  KC_LSFT,     KC_Z,     KC_X,        KC_C,     KC_V,     KC_B,    TD(1),        TD(1),           KC_N,           KC_M,      KC_COMM,         KC_DOT,   KC_SLSH,    KC_RSFT,
+		                       KC_MEH,      KC_ESC,      SYM,  SFT_SPC,                                 MS_ENT,       NAV_BSPC,       KC_DEL,         KC_MEH
+	),
+	[_SYMBOLS] = LAYOUT(
+		   KC_F12,    KC_F1,    KC_F2,       KC_F3,    KC_F4,    KC_F5,                                  KC_F6,          KC_F7,        KC_F8,          KC_F9,    KC_F10,     KC_F11,
+		  A(KC_D),  KC_QUOT,  KC_DQUO,     KC_CIRC,  KC_BSLS,  KC_TILD,                                KC_LBRC,        KC_LABK,       KC_EQL,        KC_RABK,   KC_RBRC,    KC_PSLS,
+		    KC_NO,  KC_EXLM,    KC_AT,     KC_HASH,   KC_DLR,  KC_PERC,                                KC_LCBR,        KC_LPRN,      KC_COLN,        KC_RPRN,   KC_RCBR,    KC_PMNS,
+		    KC_NO,    KC_NO,  KC_HOME,     KC_PGUP,  KC_PGDN,   KC_END,    KC_NO,  MACRO_TILDE,        KC_PIPE,        KC_AMPR,      KC_ASTR,        KC_PLUS,   KC_UNDS,     KC_GRV,
+		                      _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______
+	),
+	[_NAV] = LAYOUT(
+		    KC_NO,  A(KC_1),  A(KC_2),     A(KC_3),  A(KC_4),  A(KC_5),                                A(KC_6),        A(KC_7),      A(KC_8),        A(KC_9),     KC_NO,      KC_NO,
+		  A(KC_D),    KC_NO,    KC_NO,     A(KC_1),    KC_NO,  A(KC_7),                          RALT(KC_LEFT),  RALT(KC_DOWN),  RALT(KC_UP),  RALT(KC_RGHT),     KC_NO,      KC_NO,
+		   KC_MEH,  KC_LGUI,  KC_LALT,     KC_LSFT,  KC_LCTL,    KC_NO,                                KC_LEFT,        KC_DOWN,        KC_UP,        KC_RGHT,     KC_NO,      KC_NO,
+		    KC_NO,    KC_NO,    KC_NO,       KC_NO,    KC_NO,  A(KC_2),    KC_NO,        KC_NO,     C(KC_LEFT),     C(KC_DOWN),     C(KC_UP),     C(KC_RGHT),     KC_NO,      KC_NO,
+		                      _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______
+	),
+	[_MOUSE] = LAYOUT(
+		    KC_NO,    KC_NO,    KC_NO,       KC_NO,    KC_NO,  KC_HOME,                                KC_HOME,          KC_NO,        KC_NO,          KC_NO,     KC_NO,      KC_NO,
+		    KC_NO,    KC_NO,    KC_NO,     KC_WH_U,    KC_NO,  KC_PGUP,                                KC_PGUP,        KC_BTN1,      KC_MS_U,        KC_BTN2,     KC_NO,      KC_NO,
+		    KC_NO,    KC_NO,  KC_WH_L,     KC_WH_D,  KC_WH_R,  KC_PGDN,                                KC_PGDN,        KC_MS_L,      KC_MS_D,        KC_MS_R,   KC_BTN1,      KC_NO,
+		    KC_NO,    KC_NO,    KC_NO,       KC_NO,    KC_NO,   KC_END,  QK_LLCK,      QK_LLCK,         KC_END,        KC_BTN4,      KC_BTN3,        KC_BTN5,     KC_NO,      KC_NO,
+		                      _______,     _______,  _______,  _______,                                _______,        _______,      _______,    TG(_GAMING)
+	),
+	[_GAMING] = LAYOUT(
+		   KC_ESC,     KC_1,     KC_2,        KC_3,     KC_4,   KC_GRV,                                   KC_I,           KC_E,         KC_C,           KC_S,      KC_K,    KC_HOME,
+		   KC_TAB,     KC_6,     KC_Q,        KC_W,     KC_E,     KC_R,                                  KC_NO,        KC_LALT,        KC_UP,          KC_NO,     KC_NO,    KC_MINS,
+		  KC_BSPC,  KC_LSFT,     KC_A,        KC_S,     KC_D,     KC_F,                                  KC_NO,        KC_LEFT,      KC_DOWN,        KC_RGHT,      KC_F,      KC_NO,
+		     KC_5,  KC_LCTL,     KC_Z,        KC_X,     KC_C,     KC_V,     KC_G,       KC_EQL,          KC_NO,           KC_M,        KC_NO,          KC_NO,     KC_NO,  CHAT_MODE,
+		                       KC_TAB,  RCS(KC_NO),  KC_LALT,   KC_SPC,                                 KC_SPC,        KC_LSFT,         KC_Z,    TG(_GAMING)
+	),
+	[_UNUSED] = LAYOUT(
+		  _______,  _______,  _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______,   _______,    _______,
+		  _______,  _______,  _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______,   _______,    _______,
+		  _______,  _______,  _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______,   _______,    _______,
+		  _______,  _______,  _______,     _______,  _______,  _______,  _______,      _______,        _______,        _______,      _______,        _______,   _______,    _______,
+		                      _______,     _______,  _______,  _______,                                _______,        _______,      _______,        _______
+	),
 };
+// clang-format on
 
+// clang-format off
 const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM = LAYOUT(
-    // clang-format off
+        '*', '*', '*', '*', '*', '*',             '*', '*', '*', '*', '*', '*',
+        '*', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
         'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L', 'L',             'R', 'R', 'R', 'R', 'R', 'R',
-        'L', 'L', 'L', 'L', 'L', 'L', 'L',   'R', 'R', 'R', 'R', 'R', 'R', 'R',
-                      '*', '*', '*', '*',      '*', '*', '*', '*'
-    // clang-format on
+        'L', 'L', 'L', 'L', 'L', 'L', '*',   '*', 'R', 'R', 'R', 'R', 'R', 'R',
+                       '*', '*', '*', '*',   '*', '*', '*', '*'
 );
+// clang-format on
+
+#pragma endregion
+
+#pragma region Process_Record
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	const bool isGaming = (get_highest_layer(layer_state | default_layer_state) == _GAMING);
@@ -119,7 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			layer_clear();
 			layer_on(_GAMING);
 			return true;
-		} else if (keycode == LT(_MOUSE, KC_ENT) && record->tap.count > 0) {
+		} else if (keycode == MS_ENT && record->tap.count > 0) {
 			// Layer toggle key presses
 			chat_active = false;
 			layer_clear();
@@ -140,6 +142,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case CAMELCASE:
 			if (record->event.pressed) {
 				auto_camelcase_toggle();
+			}
+			return false;
+		case MACRO_TILDE:
+			if (record->event.pressed) {
+				SEND_STRING("~/");
 			}
 			return false;
 	}
