@@ -8,13 +8,13 @@ permissions:
 jobs:
   build:
     name: 'QMK Userspace Build'
-    uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@751ed07ce3ad102e310ee654155be6114ed7a95c
+    uses: qmk/.github/.github/workflows/qmk_userspace_build.yml@9cc16cc0b2c27ea4e216a2e07f7de02a8c9df803
     with:
       qmk_repo: vial-kb/vial-qmk
       qmk_ref: vial
 
   publish:
     name: 'QMK Userspace Publish'
-    uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@751ed07ce3ad102e310ee654155be6114ed7a95c
+    uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@9cc16cc0b2c27ea4e216a2e07f7de02a8c9df803
     if: always() && !cancelled()
     needs: build
