@@ -19,6 +19,8 @@ LTO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 OS_DETECTION_ENABLE = yes
 
+AUTOCORRECT_ENABLE = no
+
 # Custom features
 SRC += features/auto_capitalise_i.c
 SRC += features/auto_camelcase.c

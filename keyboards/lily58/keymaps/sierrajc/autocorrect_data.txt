@@ -1,0 +1,5 @@
+# Autocorrect Dictionary - Minimal Set
+# Format: :typo -> correction (: means word boundary)
+# Lines starting with # are comments
+
+:color: -> colour
