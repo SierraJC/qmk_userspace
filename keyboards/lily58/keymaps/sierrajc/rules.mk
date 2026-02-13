@@ -15,6 +15,9 @@ CONSOLE_ENABLE = no
 
 QMK_SETTINGS = yes
 LTO_ENABLE = yes
+# Override bare -flto (set by QMK) with -flto=auto so lto-wrapper uses
+# parallel LTRANS jobs instead of warning about serial fallback.
+CFLAGS += -flto=auto
 
 KEY_OVERRIDE_ENABLE = yes
 OS_DETECTION_ENABLE = yes
