@@ -1,5 +1,9 @@
 {
 	"files.associations": {
 		"layout.vil": "json"
+	},
+	"search.exclude": {
+		"qmk_firmware": true,
+		"CLAUDE.md": true
 	}
 }
