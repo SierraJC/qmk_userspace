@@ -4,10 +4,7 @@ experimental = true # for hooks
 pipx_uvx = true
 
 [hooks]
-postinstall = [
-	'git submodule update --init --recursive',
-	'qmk setup vial-kb/vial-qmk --branch vial --yes',
-]
+postinstall = ['mise run init']
 
 [tools]
 uv = "0.10.2"
@@ -16,8 +13,17 @@ uv = "0.10.2"
 "pipx:clang-format" = "21.1.8"
 
 [env]
-QMK_HOME = "{{ config_root }}/../qmk_firmware"
+QMK_HOME = "{{ config_root }}/qmk_firmware"
 QMK_USERSPACE = "{{ config_root }}"
+
+[tasks.init]
+description = "Initialise submodules and QMK CLI config"
+run = [
+	'git submodule update --init --recursive',
+	'qmk config user.qmk_home="$QMK_HOME"',
+	'qmk config user.overlay_dir="$QMK_USERSPACE"',
+	'qmk git-submodule',
+]
 
 [tasks.build]
 description = "Compile Lily58 firmware"
@@ -36,5 +42,9 @@ description = "Regenerate autocorrect_data.h from dictionary file"
 run = 'qmk generate-autocorrect-data keyboards/lily58/keymaps/sierrajc/autocorrect_data.txt -kb lily58 -km sierrajc'
 
 [tasks.update-firmware]
-description = "Pull latest changes for vial-qmk and sync submodules"
-run = ['git -C "$QMK_HOME" pull --ff-only', 'qmk git-submodule']
+description = "Update qmk_firmware submodule"
+run = [
+	'git submodule update --init qmk_firmware',
+	'git submodule update --remote qmk_firmware',
+	'qmk git-submodule',
+]

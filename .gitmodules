@@ -1,3 +1,7 @@
+[submodule "qmk_firmware"]
+	path = qmk_firmware
+	url = https://github.com/vial-kb/vial-qmk.git
+	branch = vial
 [submodule "modules/getreuer"]
 	path = modules/getreuer
 	url = https://github.com/getreuer/qmk-modules.git

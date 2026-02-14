@@ -46,7 +46,7 @@
 			"command": "mise",
 			"args": ["run", "update-firmware"],
 			"problemMatcher": [],
-			"detail": "Pull latest changes for vial-qmk and sync submodules"
+			"detail": "Update qmk_firmware submodule"
 		}
 	]
 }
