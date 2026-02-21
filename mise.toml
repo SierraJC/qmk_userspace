@@ -7,7 +7,7 @@ pipx_uvx = true
 postinstall = ['mise run init']
 
 [tools]
-uv = "0.10.2"
+uv = "0.10.4"
 "pipx:qmk" = "1.2.0"
 "pipx:clangd" = "21.1.8"
 "pipx:clang-format" = "21.1.8"
