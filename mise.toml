@@ -10,7 +10,7 @@ postinstall = ['mise run init']
 uv = "0.10.4"
 "pipx:qmk" = "1.2.0"
 "pipx:clangd" = "21.1.8"
-"pipx:clang-format" = "21.1.8"
+"pipx:clang-format" = "22.1.0"
 
 [env]
 QMK_HOME = "{{ config_root }}/qmk_firmware"
