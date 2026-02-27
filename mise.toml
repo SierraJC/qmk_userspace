@@ -9,7 +9,7 @@ postinstall = ['mise run init']
 [tools]
 uv = "0.10.4"
 "pipx:qmk" = "1.2.0"
-"pipx:clangd" = "21.1.8"
+"pipx:clangd" = "22.1.0"
 "pipx:clang-format" = "21.1.8"
 
 [env]
