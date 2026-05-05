@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
 
 permissions:
+  attestations: write
   contents: write
+  id-token: write
 
 jobs:
   build:
@@ -17,8 +19,28 @@ jobs:
       qmk_repo: vial-kb/vial-qmk
       qmk_ref: vial
 
+  attest:
+    name: 'QMK Userspace Attest'
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    needs: build
+
+    steps:
+      - name: Download binaries
+        uses: actions/download-artifact@v8
+        with:
+          name: Firmware
+
+      - name: Attest firmware artifacts
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            *.bin
+            *.hex
+            *.uf2
+
   publish:
     name: 'QMK Userspace Publish'
     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@ae0d588378c528a97635c7dc4345fff2a2ff5dac
     if: always() && !cancelled() && github.event_name != 'pull_request'
-    needs: build
+    needs: [build, attest]
