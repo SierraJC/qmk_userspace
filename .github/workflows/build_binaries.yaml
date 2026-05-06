@@ -17,8 +17,33 @@ jobs:
       qmk_repo: vial-kb/vial-qmk
       qmk_ref: vial
 
+  attest:
+    name: 'QMK Userspace Attest'
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    needs: build
+    permissions:
+      actions: read
+      attestations: write
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download binaries
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: Firmware
+
+      - name: Attest firmware artifacts
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
+        with:
+          subject-path: |
+            *.bin
+            *.hex
+            *.uf2
+
   publish:
     name: 'QMK Userspace Publish'
     uses: qmk/.github/.github/workflows/qmk_userspace_publish.yml@ae0d588378c528a97635c7dc4345fff2a2ff5dac
-    if: always() && !cancelled() && github.event_name != 'pull_request'
-    needs: build
+    if: needs.attest.result == 'success' && github.event_name != 'pull_request'
+    needs: [build, attest]
