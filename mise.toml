@@ -1,13 +1,13 @@
 
 [settings]
 experimental = true # for hooks
-pipx_uvx = true
 
 [hooks]
 postinstall = ['mise run init']
 
 [tools]
 uv = "0.10.4"
+gcc-arm-none-eabi = "13.3.Rel1"
 "pipx:qmk" = "1.2.0"
 "pipx:clangd" = "21.1.8"
 "pipx:clang-format" = "21.1.8"
