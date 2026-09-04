@@ -6,7 +6,7 @@ experimental = true # for hooks
 postinstall = ['mise run init']
 
 [tools]
-uv = "0.10.4"
+uv = "0.12.9"
 gcc-arm-none-eabi = "13.3.Rel1"
 "pipx:qmk" = "1.2.0"
 "pipx:clangd" = "22.1.1"
